@@ -1,0 +1,47 @@
+body
+{
+	background-color: #58C1D2;
+	color: white;
+	font-size: 30px;
+	text-align: center;
+	font-family: 'Roboto Slab', serif;
+}
+
+h1
+{
+	font-size: 60px;
+	margin: 5px;
+}
+
+h2
+{
+	font-size: 30px;
+	font-weight: 200;
+	font-style: italic;
+	margin: 5px;
+}
+
+.mainPanel
+{
+	background-color: #12C1D2;
+	width: 500px;
+	height:400px;
+}
+
+.buttonsStyle
+{
+	background-color:#1a98A2;
+	box-shadow: 3px 3px 5px #225;
+	border: none;
+	color: white;
+}
+
+.buttonsStyle:hover
+{
+	background-color: #2AA8B2;
+}
+
+.btn
+{
+	font-size: 1.1rem;
+}
