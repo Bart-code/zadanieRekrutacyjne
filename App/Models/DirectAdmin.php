@@ -74,8 +74,6 @@ class DirectAdmin extends \Core\Model
 			echo "User created on server<br>\n";
 		}
 	}
-
-		//$this->sock->query('/CMD_API_SHOW_USER_CONFIG?user='.$show_user);
 	
 	public function deleteUser($userName)
 	{
@@ -84,8 +82,6 @@ class DirectAdmin extends \Core\Model
 		echo var_dump($result);
 		return $result;
 	}
-	
-	//CMD_API_CHANGE_INFO
 	
 	public function changeUserData($userName)
 	{
@@ -109,10 +105,34 @@ class DirectAdmin extends \Core\Model
 		echo var_dump($result);
 	}
 	
-	public function showPackages($userName)
+	public function showPackages()
 	{
 		$this->sock->query('/CMD_API_PACKAGES_USER');
 		$result = $this->sock->fetch_parsed_body();
 		echo var_dump($result);
 	}
+	
+	public function changeEmail($userName , $newEmail)
+	{
+		$this -> sock -> set_method("POST");
+		$this->sock->query('/CMD_API_MODIFY_USER',array('action' => 'email','user' => $userName,'package' => $newEmail));
+		$result = $this->sock->fetch_parsed_body();
+		echo var_dump($result);
+	}
+	
+	public function changePassword($userName , $newPassword)
+	{
+		$this -> sock -> set_method("POST");
+		$this->sock->query('/CMD_API_USER_PASSWD',array('username' => $userName,'passwd' => $newPassword,'passwd2' => $newPassword));
+		$result = $this->sock->fetch_parsed_body();
+		echo var_dump($result);
+	}
+	
+	public function changePackage($userName , $newPackage)
+	{
+		$this->sock->query('/CMD_API_MODIFY_USER',array('action' => 'package','user' => $userName,'package' => $newPackage));
+		$result = $this->sock->fetch_parsed_body();
+		echo var_dump($result);
+	}
+
 }

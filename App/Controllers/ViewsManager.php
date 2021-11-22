@@ -43,8 +43,18 @@ class ViewsManager extends \Core\Controller
 		View::renderTemplate('AddPackage/addPackageSite.html');
     }
 	
-	public function showAllackagesAction()
+	public function showChangeEmailAction()
     {
-		View::renderTemplate('AddPackage/addPackageSite.html');
+		View::renderTemplate('ChangeData/changeEmailSite.html');
+    }
+	
+	public function showChangePasswordAction()
+    {
+		View::renderTemplate('ChangeData/changePasswordSite.html');
+    }
+	
+	public function showChangePackageAction()
+    {
+		View::renderTemplate('ChangeData/changePackageSite.html');
     }
 }
