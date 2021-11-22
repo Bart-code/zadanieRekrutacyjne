@@ -1,6 +1,6 @@
 body
 {
-	background-color: #58C1D2;
+	background-color: #ccc;
 	color: white;
 	font-size: 30px;
 	text-align: center;
@@ -11,6 +11,7 @@ h1
 {
 	font-size: 60px;
 	margin: 5px;
+	color: #3F9DD7;
 }
 
 h2
@@ -23,14 +24,15 @@ h2
 
 .mainPanel
 {
-	background-color: #12C1D2;
-	width: 500px;
-	height:400px;
+	background-color: #3F9DD7;
+	min-width: 500px;
+	border-radius:20px;
+	height:auto !important;
 }
 
 .buttonsStyle
 {
-	background-color:#1a98A2;
+	background-color:#4089B6;
 	box-shadow: 3px 3px 5px #225;
 	border: none;
 	color: white;
@@ -38,7 +40,7 @@ h2
 
 .buttonsStyle:hover
 {
-	background-color: #2AA8B2;
+	background-color: #64B1E1;
 }
 
 .btn

@@ -15,36 +15,34 @@
 </head>
 <body>
     <header class="mt-4">		
-		<h1 > 
-			<a>
-				DirectAdmin Manager
-			</a>
+		<h1> 
+			DirectAdmin Manager
 		</h1>
 	</header>
-	<form method="post" action="/Signin/login">
-		<div class="row">
-			<div class="col-md-6 mainPanel mx-auto p-5">
-				<div class="row mt-5">
-					<div class="col-md-8 mx-auto">
-						<input type="text" name="accountName" class="form-control" placeholder="Nazwa konta">
-					</div>
-				</div>
-				<div class="row mt-3">
-					<div class="col-md-8 mx-auto">
-						<input type="text" name="password" class="form-control" placeholder="Hasło">
-					</div>
-				</div>
-				<div class="row mt-5">
-					<div class="col-md-6 mx-auto">
-						<input type="submit" class="btn buttonsStyle"  placeholder="Plan" value="Zaloguj">
-					</div>
-					<div class="col-md-6 mx-auto">
-						<a class="btn buttonsStyle" href="/Signup/new" role="button">Utwórz konto</a>
+		<form method="post" action="/DeleteUser/deleteUser">
+			<div class="row">
+				<div class="col-md-4 mainPanel mx-auto px-3">
+					<div class="row mt-5 mb-4">
+						<div class="col-md-10 mx-auto">
+							<div class="row">
+								<div class="col-md-10 mx-auto">
+									<input type="text" name="userName" class="form-control" placeholder="Nazwa użytkownika">
+								</div>
+							</div>
+							<div class="row mt-3">
+								<div class="col-md-6">
+									<a class="btn buttonsStyle" href="/ViewsManager/showMainSite" role="button">Powrót</a>
+								</div>
+								<div class="col-md-6">
+									<button type="submit" class="btn buttonsStyle" id="confirmNewNameBtn">Usuń konto</button>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-	</form>
+		</form>
+		
 	
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>

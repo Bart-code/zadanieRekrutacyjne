@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+    <meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>DirectAdmin Manager</title>
+	<meta name="description" content="DitectAdmin" />
+	<meta name="keywords" content="DirectAdmin" />
+	<meta http-equiv="X-Ua-Compatible" content="IE=edge">
+	
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	
+	<link rel="stylesheet" href="/css/style.css" />
+
+</head>
+<body>
+    <header class="mt-4">		
+		<h1> 
+			DirectAdmin Manager
+		</h1>
+	</header>
+		<div class="row">
+			<div class="col-md-4 mainPanel mx-auto px-3">
+				<div class="row mt-5 mx-4">
+					<div class="col-md-8 mx-auto">
+						<a class="btn buttonsStyle w-100" href="/ViewsManager/showSignupSite" role="button">Utwórz konto</a>
+					</div>
+				</div>
+				<div class="row mt-3 mx-4">
+					<div class="col-md-8 mx-auto">
+						<a class="btn buttonsStyle w-100" href="/ViewsManager/showChangeDataSite" role="button">Edytuj dane użytkownika</a>
+					</div>
+				</div>
+				<div class="row mt-3 mx-4">
+					<div class="col-md-8 mx-auto">
+						<a class="btn buttonsStyle w-100" href="/ViewsManager/showDeleteAccountSite" role="button">Usuń konto</a>
+					</div>
+				</div>
+				<div class="row mt-3 mx-4">
+					<div class="col-md-8 mx-auto">
+						<a class="btn buttonsStyle w-100" href="/ShowUsers/showUsers" role="button">Pokaz użytkowników</a>
+					</div>
+				</div>
+				<div class="row mt-3 mx-4">
+					<div class="col-md-8 mx-auto">
+						<a class="btn buttonsStyle w-100" href="/ViewsManager/showUserShowConfig" role="button">Pokaz użytkownika</a>
+					</div>
+				</div>
+				<div class="row mt-3 mx-4">
+					<div class="col-md-8 mx-auto">
+						<a class="btn buttonsStyle w-100" href="/ViewsManager/showAddPackage" role="button">Dodaj plan</a>
+					</div>
+				</div>
+				<div class="row mt-3 mx-4">
+					<div class="col-md-8 mx-auto">
+						<a class="btn buttonsStyle w-100" href="/ViewsManager/showAllPackages" role="button">Pokaż dostępne plany</a>
+					</div>
+				</div>
+				<div class="row mt-5 mx-4 mb-5">
+					<div class="col-md-8 mx-auto">
+						<a class="btn buttonsStyle w-100" href="#" role="button">Wyloguj</a>
+					</div>
+					<div class="col-md-8 mx-auto">
+						{{ result }}
+					</div>
+				</div>
+			</div>
+		</div>
+	
+		<!-- Modal for delete account -->
+		<div class="modal fade" id="daleteAccountModal"  role="dialog" aria-labelledby="ediModalTitle" aria-hidden="true">
+		  <div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content mainPanel">
+				<form id="deleteAccountForm">
+					<div class="row mt-5 mb-4">
+						<div class="col-md-10 mx-auto">
+							<div class="row">
+								<div class="col-md-10 mx-auto">
+									<input type="text" name="userName" class="form-control" placeholder="Nazwa użytkownika">
+								</div>
+							</div>
+							<div class="row  mt-2">
+								<div class="col-md-10 mx-auto">
+									<input type="text" name="userName" class="form-control" placeholder="Email">
+								</div>
+							</div>
+							<div class="row  mt-2">
+								<div class="col-md-10 mx-auto">
+									<input type="text" name="userName" class="form-control" placeholder="Plan">
+								</div>
+							</div>
+							<div class="row  mt-2">
+								<div class="col-md-10 mx-auto">
+									<input type="text" name="userName" class="form-control" placeholder="Hasło">
+								</div>
+							</div>
+							<div class="row mt-3">
+								<div class="col-md-6">
+									<button type="button" class="btn buttonsStyle" data-dismiss="modal">Anuluj</button>
+								</div>
+								<div class="col-md-6">
+									<button type="submit" form="deleteAccountForm" class="btn buttonsStyle" id="confirmNewNameBtn">Zapisz zmiany</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+		  </div>
+		</div>
+	
+	<!-- Modal for edit name -->
+		<div class="modal fade" id="editDataModal" tabindex="-1" role="dialog" aria-labelledby="editDataModalTitle" aria-hidden="true">
+		  <div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content mainPanel">
+				<form id="editDataForm">
+					<div class="row mt-5 mb-4">
+						<div class="col-md-10 mx-auto">
+							<div class="row">
+								<div class="col-md-10 mx-auto">
+									<input type="text" name="userName" class="form-control" placeholder="Nazwa użytkownika">
+								</div>
+							</div>
+							<div class="row  mt-2">
+								<div class="col-md-10 mx-auto">
+									<input type="text" name="userName" class="form-control" placeholder="Email">
+								</div>
+							</div>
+							<div class="row  mt-2">
+								<div class="col-md-10 mx-auto">
+									<input type="text" name="userName" class="form-control" placeholder="Plan">
+								</div>
+							</div>
+							<div class="row  mt-2">
+								<div class="col-md-10 mx-auto">
+									<input type="text" name="userName" class="form-control" placeholder="Hasło">
+								</div>
+							</div>
+							<div class="row mt-3">
+								<div class="col-md-6">
+									<button type="button" class="btn buttonsStyle" data-dismiss="modal">Anuluj</button>
+								</div>
+								<div class="col-md-6">
+									<button type="submit" form="editDataForm" name="editSubmitBtn" class="btn buttonsStyle" id="confirmNewNameBtn">Zapisz zmiany</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+		  </div>
+		</div>
+		
+	
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+</body>
+</html>

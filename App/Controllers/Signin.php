@@ -2,11 +2,15 @@
 
 namespace App\Controllers;
 
+//include 'ViewManager.php';
+
 use \Core\View;
+
 
 class Signin extends \Core\Controller
 {
-
+	private $viewManager;
+	
     protected function before()
     {
 		session_start();
@@ -14,6 +18,8 @@ class Signin extends \Core\Controller
 
     public function loginAction()
     {
-        View::renderTemplate('MainSite/mainSite.html');
+		$routparams = [];
+		$viewManager = new ViewsManager($routparams);
+		$viewManager -> showMainSiteAction();
     }
 }
