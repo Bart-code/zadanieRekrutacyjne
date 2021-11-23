@@ -41,9 +41,24 @@
 						<a class="btn buttonsStyle w-100" href="/AccountManager/showAllUsers" role="button">Pokaż wszystkich użytkowników</a>
 					</div>
 				</div>
+				<div class="row ">
+					<div class="col-md-6 mx-auto ">
+					{% if result is not empty and result == "Show users clicked"%}
+						{% if resultsArray|length > 0 %}
+							<ul class="usersList mt-3">
+							{% for result in resultsArray %}
+								<li>{{ resultsArray[loop.index-1] }}</li>
+							{% endfor %}
+							</ul>
+						{% else%}
+							<p class="usersList mt-3"> No users </p>
+						{% endif %}
+					{% endif %}
+					</div>
+				</div>
 				<div class="row mt-3 mx-4">
 					<div class="col-md-8 mx-auto">
-						<a class="btn buttonsStyle w-100" href="/ViewsManager/showUserShowConfig" role="button">Pokaż użytkownika</a>
+						<a class="btn buttonsStyle w-100" href="/ViewsManager/showUserConfig" role="button">Pokaż użytkownika</a>
 					</div>
 				</div>
 				<div class="row mt-3 mx-4">
@@ -56,97 +71,27 @@
 						<a class="btn buttonsStyle w-100" href="/PackageManager/showAllPackages" role="button">Pokaż dostępne plany</a>
 					</div>
 				</div>
+				<div class="row ">
+					<div class="col-md-6 mx-auto ">
+					{% if result is not empty and result == "Show packages clicked"%}
+						{% if resultsArray|length > 0 %}
+							<ul class="usersList mt-3">
+							{% for result in resultsArray %}
+								<li>{{ resultsArray[loop.index-1] }}</li>
+							{% endfor %}
+							</ul>
+						{% else%}
+							<p class="usersList mt-3"> No packages </p>
+						{% endif %}
+					{% endif %}
+					</div>
+				</div>
 				<div class="row mt-5 mx-4 mb-5">
 					<div class="col-md-8 mx-auto">
 						<a class="btn buttonsStyle w-100" href="#" role="button">Wyloguj</a>
 					</div>
-					<div class="col-md-8 mx-auto">
-						{{ result }}
-					</div>
 				</div>
 			</div>
-		</div>
-	
-		<!-- Modal for delete account -->
-		<div class="modal fade" id="daleteAccountModal"  role="dialog" aria-labelledby="ediModalTitle" aria-hidden="true">
-		  <div class="modal-dialog modal-dialog-centered" role="document">
-			<div class="modal-content mainPanel">
-				<form id="deleteAccountForm">
-					<div class="row mt-5 mb-4">
-						<div class="col-md-10 mx-auto">
-							<div class="row">
-								<div class="col-md-10 mx-auto">
-									<input type="text" name="userName" class="form-control" placeholder="Nazwa użytkownika">
-								</div>
-							</div>
-							<div class="row  mt-2">
-								<div class="col-md-10 mx-auto">
-									<input type="text" name="userName" class="form-control" placeholder="Email">
-								</div>
-							</div>
-							<div class="row  mt-2">
-								<div class="col-md-10 mx-auto">
-									<input type="text" name="userName" class="form-control" placeholder="Plan">
-								</div>
-							</div>
-							<div class="row  mt-2">
-								<div class="col-md-10 mx-auto">
-									<input type="text" name="userName" class="form-control" placeholder="Hasło">
-								</div>
-							</div>
-							<div class="row mt-3">
-								<div class="col-md-6">
-									<button type="button" class="btn buttonsStyle" data-dismiss="modal">Anuluj</button>
-								</div>
-								<div class="col-md-6">
-									<button type="submit" form="deleteAccountForm" class="btn buttonsStyle" id="confirmNewNameBtn">Zapisz zmiany</button>
-								</div>
-							</div>
-						</div>
-					</div>
-				</form>
-		  </div>
-		</div>
-	
-	<!-- Modal for edit name -->
-		<div class="modal fade" id="editDataModal" tabindex="-1" role="dialog" aria-labelledby="editDataModalTitle" aria-hidden="true">
-		  <div class="modal-dialog modal-dialog-centered" role="document">
-			<div class="modal-content mainPanel">
-				<form id="editDataForm">
-					<div class="row mt-5 mb-4">
-						<div class="col-md-10 mx-auto">
-							<div class="row">
-								<div class="col-md-10 mx-auto">
-									<input type="text" name="userName" class="form-control" placeholder="Nazwa użytkownika">
-								</div>
-							</div>
-							<div class="row  mt-2">
-								<div class="col-md-10 mx-auto">
-									<input type="text" name="userName" class="form-control" placeholder="Email">
-								</div>
-							</div>
-							<div class="row  mt-2">
-								<div class="col-md-10 mx-auto">
-									<input type="text" name="userName" class="form-control" placeholder="Plan">
-								</div>
-							</div>
-							<div class="row  mt-2">
-								<div class="col-md-10 mx-auto">
-									<input type="text" name="userName" class="form-control" placeholder="Hasło">
-								</div>
-							</div>
-							<div class="row mt-3">
-								<div class="col-md-6">
-									<button type="button" class="btn buttonsStyle" data-dismiss="modal">Anuluj</button>
-								</div>
-								<div class="col-md-6">
-									<button type="submit" form="editDataForm" name="editSubmitBtn" class="btn buttonsStyle" id="confirmNewNameBtn">Zapisz zmiany</button>
-								</div>
-							</div>
-						</div>
-					</div>
-				</form>
-		  </div>
 		</div>
 		
 	

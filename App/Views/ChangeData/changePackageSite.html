@@ -33,6 +33,17 @@
 						<input type="text" name="newPackage" class="form-control" placeholder="Nowy plan">
 					</div>
 				</div>
+				<div class="row mt-1">
+					<div class="col-md-8 mx-auto ">
+						{% if result is not empty %}
+							{% if result == 'Validate' %}
+								<p class="successMessage"> Package changed succesfully !</p>
+							{% else %}
+								<p class="errorMessage"> {{result}}</p>
+							{% endif %}
+						{% endif %}
+					</div>
+				</div>
 				<div class="row mt-4 mb-5">
 					<div class="col-md-6">
 						<a class="btn buttonsStyle" href="/ViewsManager/showChangeDataSite" role="button">Powrót</a>

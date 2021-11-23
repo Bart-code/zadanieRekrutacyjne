@@ -29,6 +29,21 @@
 									<input type="text" name="userName" class="form-control" placeholder="Nazwa użytkownika">
 								</div>
 							</div>
+							<div class="row ">
+								<div class="col-md-6 mx-auto ">
+									{% if result is not empty %}
+										{% if result != 'Show config available' %}
+											<p class="errorMessage"> {{result}}</p>
+										{% else %}
+											<ul class="usersList mt-3">
+												{% for key,value in resultsArray %}
+													<li>{{ key }}: {{ value }}</li>
+												{% endfor %}
+											</ul>
+										{% endif %}
+									{% endif %}
+								</div>
+							</div>
 							<div class="row mt-3">
 								<div class="col-md-6">
 									<a class="btn buttonsStyle" href="/ViewsManager/showMainSite" role="button">Powrót</a>

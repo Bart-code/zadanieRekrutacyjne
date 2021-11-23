@@ -47,3 +47,20 @@ h2
 {
 	font-size: 1.1rem;
 }
+
+.successMessage
+{
+	font-size: 16px;
+	color: #49E533;
+}
+
+.errorMessage
+{
+	font-size: 16px;
+	color: #EB4461;
+}
+
+.usersList
+{
+	font-size: 18px;
+}

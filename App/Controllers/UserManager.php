@@ -7,6 +7,13 @@ use \App\Models\DirectAdmin;
 
 class UserManager extends \Core\Controller
 {
+	
+	private $viewsManager;
+	
+	public function __construct()
+    {
+		$this -> viewsManager = new ViewsManager("");
+	}
 
     protected function before()
     {
@@ -16,19 +23,25 @@ class UserManager extends \Core\Controller
 	public function changeEmailAction()
 	{
 		$directAdmin = new DirectAdmin("http://65.108.88.40", "admin", "axm-9wxwdgM3VLfu");
-		$directAdmin -> changeEmail($_POST['userName'] , $_POST['newEmail']);
+		$result = $directAdmin -> changeEmail($_POST['userName'] , $_POST['newEmail']);
+		$this -> viewsManager -> setResult($result);
+		$this -> viewsManager -> showChangeEmailAction();
 	}
 	
 	public function changePasswordAction()
 	{
 		$directAdmin = new DirectAdmin("http://65.108.88.40", "admin", "axm-9wxwdgM3VLfu");
-		$directAdmin -> changePassword($_POST['userName'] , $_POST['newPassword']);
+		$result = $directAdmin -> changePassword($_POST['userName'] , $_POST['newPassword'],$_POST['newPassword2']);
+		$this -> viewsManager -> setResult($result);
+		$this -> viewsManager -> showChangePasswordAction();
 	}
 	
 	public function changePackageAction()
 	{
 		$directAdmin = new DirectAdmin("http://65.108.88.40", "admin", "axm-9wxwdgM3VLfu");
-		$directAdmin -> changePackage($_POST['userName'] , $_POST['newPackage']);
+		$result = $directAdmin -> changePackage($_POST['userName'] , $_POST['newPackage']);
+		$this -> viewsManager -> setResult($result);
+		$this -> viewsManager -> showChangePackageAction();
 	}
 
 }

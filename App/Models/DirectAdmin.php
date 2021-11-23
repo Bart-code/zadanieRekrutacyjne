@@ -26,23 +26,20 @@ class DirectAdmin extends \Core\Model
 		$this ->sock->connect($serverAdres, $this->port); 
 		$this ->sock->set_login($userName,$password);
     }
-
-    public function connect()
-    {
-        
-    }
 	
 	public function showUsers()
 	{
 		$this->sock->query("/CMD_API_SHOW_ALL_USERS");
 		$result = $this->sock->fetch_parsed_body();
-		//print_r($result);
-		if (!$this->error) {
-			echo var_dump($result);
-			return;
-		} else {
-			return("Error!");
+		if(count($result) > 0)
+		{
+			return $result['list'];
 		}
+		else
+		{
+			return $result;
+		}
+		
 	}
 	
 	public function addUser($name,$email,$packasge,$password)
@@ -61,26 +58,30 @@ class DirectAdmin extends \Core\Model
 		));
  
 		$result = $this->sock->fetch_parsed_body();
-		echo var_dump($result);
 	 
 		if( $result['error'] != "0" )
 		{
-			echo "<b>Error Creating user  <br>\n";
-			echo $result['text']."<br>\n";
-			echo $result['details']."<br></b>\n";
+			return "Error Creating user. ".$result['details'];
 		}
 		else
 		{
-			echo "User created on server<br>\n";
+			return "Validate";
 		}
 	}
 	
 	public function deleteUser($userName)
 	{
+		if( empty($userName))return "Error Creating user. Check user name";
 		$this->sock->query('/CMD_API_SELECT_USERS',array( 'confirmed' => 'Confirm' , 'delete' => 'yes' , 'select0' => $userName));
 		$result = $this->sock->fetch_parsed_body();
-		echo var_dump($result);
-		return $result;
+		if( $result['error'] != "0" )
+		{
+			return "Error Creating user. ".$result['details'];
+		}
+		else
+		{
+			return "Validate";
+		}
 	}
 	
 	public function changeUserData($userName)
@@ -95,44 +96,86 @@ class DirectAdmin extends \Core\Model
 	{
 		$this->sock->query('/CMD_API_SHOW_USER_CONFIG',array('user' => $userName));
 		$result = $this->sock->fetch_parsed_body();
-		echo var_dump($result);
+		if(  !isset( $result['error']) )
+		{
+			return $result;
+		}
+		else
+		{
+			return "Unable to show user";
+		}
 	}
 	
 	public function addPackage($newPackage)
 	{
 		$this->sock->query('/CMD_API_MANAGE_USER_PACKAGES',array( 'add' => 'Save' , 'packagename' => $newPackage));
 		$result = $this->sock->fetch_parsed_body();
-		echo var_dump($result);
+		if( $result['error'] != "0" )
+		{
+			return "Error adding new package. ".$result['details'];
+		}
+		else
+		{
+			return "Validate";
+		}
 	}
 	
 	public function showPackages()
 	{
 		$this->sock->query('/CMD_API_PACKAGES_USER');
 		$result = $this->sock->fetch_parsed_body();
-		echo var_dump($result);
+		if(count($result) > 0)
+		{
+			return $result['list'];
+		}
+		else
+		{
+			return $result;
+		}
 	}
 	
 	public function changeEmail($userName , $newEmail)
 	{
 		$this -> sock -> set_method("POST");
-		$this->sock->query('/CMD_API_MODIFY_USER',array('action' => 'email','user' => $userName,'package' => $newEmail));
+		$this->sock->query('/CMD_API_MODIFY_USER',array('action' => 'single','user' => $userName, 'evalue'=> $newEmail , 'email' => 'Save E-Mail'));
 		$result = $this->sock->fetch_parsed_body();
-		echo var_dump($result);
+		if( $result['error'] != "0" )
+		{
+			return "Error changing an email. ".$result['details'];
+		}
+		else
+		{
+			return "Validate";
+		}
 	}
 	
-	public function changePassword($userName , $newPassword)
+	public function changePassword($userName , $newPassword, $newPassword2)
 	{
 		$this -> sock -> set_method("POST");
-		$this->sock->query('/CMD_API_USER_PASSWD',array('username' => $userName,'passwd' => $newPassword,'passwd2' => $newPassword));
+		$this->sock->query('/CMD_API_USER_PASSWD',array('username' => $userName,'passwd' => $newPassword,'passwd2' => $newPassword2));
 		$result = $this->sock->fetch_parsed_body();
-		echo var_dump($result);
+		if( $result['error'] != "0" )
+		{
+			return "Error changing a password. ".$result['details'];
+		}
+		else
+		{
+			return "Validate";
+		}
 	}
 	
 	public function changePackage($userName , $newPackage)
 	{
 		$this->sock->query('/CMD_API_MODIFY_USER',array('action' => 'package','user' => $userName,'package' => $newPackage));
 		$result = $this->sock->fetch_parsed_body();
-		echo var_dump($result);
+		if( $result['error'] != "0" )
+		{
+			return "Error changing a package. ".$result['details'];
+		}
+		else
+		{
+			return "Validate";
+		}
 	}
 
 }

@@ -44,12 +44,23 @@
 						<input type="text" name="password" class="form-control" placeholder="Hasło">
 					</div>
 				</div>
+				<div class="row mt-1">
+					<div class="col-md-8 mx-auto ">
+						{% if result is defined %}
+							{% if result == 'Validate' %}
+								<p class="successMessage"> Account create succesfully !</p>
+							{% else %}
+								<p class="errorMessage"> {{result}} </p>
+							{% endif %}
+						{% endif %}
+					</div>
+				</div>
 				<div class="row mt-5 mb-3">
 					<div class="col-md-6 mx-auto">
 						<input type="submit" class="btn buttonsStyle"  placeholder="Plan" value="Zarejestruj">
 					</div>
 					<div class="col-md-6 mx-auto">
-						<a class="btn buttonsStyle" href="/Home/index" role="button">Anuluj</a>
+						<a class="btn buttonsStyle" href="/ViewsManager/showMainSite" role="button">Anuluj</a>
 					</div>
 				</div>
 			</div>
