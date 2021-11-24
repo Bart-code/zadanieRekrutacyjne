@@ -43,15 +43,19 @@
 				</div>
 				<div class="row ">
 					<div class="col-md-6 mx-auto ">
-					{% if result is not empty and result == "Show users clicked"%}
-						{% if resultsArray|length > 0 %}
-							<ul class="usersList mt-3">
-							{% for result in resultsArray %}
-								<li>{{ resultsArray[loop.index-1] }}</li>
-							{% endfor %}
-							</ul>
-						{% else%}
-							<p class="usersList mt-3"> No users </p>
+					{% if result is not empty%}
+						{% if result == "Show users clicked" %}
+							{% if resultsArray|length > 0 %}
+								<ul class="usersList mt-3">
+								{% for result in resultsArray %}
+									<li>{{ resultsArray[loop.index-1] }}</li>
+								{% endfor %}
+								</ul>
+							{% else%}
+								<p class="usersList mt-3"> No users </p>
+							{% endif %}
+						{% elseif  result == "Error showing users" %}
+							<p class="usersList mt-3 errorMessage"> {{result}}</p>
 						{% endif %}
 					{% endif %}
 					</div>
@@ -73,22 +77,26 @@
 				</div>
 				<div class="row ">
 					<div class="col-md-6 mx-auto ">
-					{% if result is not empty and result == "Show packages clicked"%}
-						{% if resultsArray|length > 0 %}
-							<ul class="usersList mt-3">
-							{% for result in resultsArray %}
-								<li>{{ resultsArray[loop.index-1] }}</li>
-							{% endfor %}
-							</ul>
-						{% else%}
-							<p class="usersList mt-3"> No packages </p>
+					{% if result is not empty%}
+						{% if result == "Show packages clicked" %}
+							{% if resultsArray|length > 0 %}
+								<ul class="usersList mt-3">
+								{% for result in resultsArray %}
+									<li>{{ resultsArray[loop.index-1] }}</li>
+								{% endfor %}
+								</ul>
+							{% else%}
+								<p class="usersList mt-3"> No packages </p>
+							{% endif %}
+						{% elseif  result == "Error showing packages" %}
+							<p class="usersList mt-3 errorMessage"> {{result}}</p>
 						{% endif %}
 					{% endif %}
 					</div>
 				</div>
 				<div class="row mt-5 mx-4 mb-5">
 					<div class="col-md-8 mx-auto">
-						<a class="btn buttonsStyle w-100" href="#" role="button">Wyloguj</a>
+						<a class="btn buttonsStyle w-100" href="/AdminManager/logout" role="button">Wyloguj</a>
 					</div>
 				</div>
 			</div>

@@ -1,22 +1,14 @@
 <?php
 
 namespace App\Controllers;
-
-use \Core\View;
 use \App\Models\DirectAdmin;
 
-class PackageManager extends \Core\Controller
+class PackageManager extends \App\Controllers\DirectAdminController
 {
-	private $viewsManager;
-	
-	public function __construct()
-    {
-		$this -> viewsManager = new ViewsManager("");
-	}
 	
 	public function addPackage()
 	{
-		$directAdmin = new DirectAdmin("http://65.108.88.40", "admin", "axm-9wxwdgM3VLfu");
+		$directAdmin = $this -> getDirectAdminFromSession();
 		$result = $directAdmin -> addPackage($_POST['newPackage']);
 		$this -> viewsManager -> setResult($result);
 		$this -> viewsManager -> showAddPackageAction();
@@ -24,10 +16,19 @@ class PackageManager extends \Core\Controller
 	
 	public function showAllPackages()
 	{
-		$directAdmin = new DirectAdmin("http://65.108.88.40", "admin", "axm-9wxwdgM3VLfu");
+		$directAdmin = $this -> getDirectAdminFromSession();
 		$result = $directAdmin -> showPackages();
-		$this -> viewsManager -> setResultArray($result);
-		$this -> viewsManager -> setResult("Show packages clicked");
+		if( gettype($result) == "array")
+		{
+			$this -> viewsManager -> setResultArray($result);
+			$this -> viewsManager -> setResult("Show packages clicked");
+		}
+		else
+		{
+			$this -> viewsManager -> setResult($result);
+			var_dump($_SESSION['serverAddress']);
+		}
+		
 		$this -> viewsManager -> showMainSite();
 	}
 

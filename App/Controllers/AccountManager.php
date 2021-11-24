@@ -5,23 +5,12 @@ namespace App\Controllers;
 use \Core\View;
 use \App\Models\DirectAdmin;
 
-class AccountManager extends \Core\Controller
+class AccountManager extends \App\Controllers\DirectAdminController
 {
-	private $viewsManager;
-	
-	public function __construct()
-    {
-		$this -> viewsManager = new ViewsManager("");
-	}
-
-    protected function before()
-    {
-		session_start();
-    }
 	
 	public function addUserAction()
     {
-		$directAdmin = new DirectAdmin("http://65.108.88.40", "admin", "axm-9wxwdgM3VLfu");
+		$directAdmin = $this -> getDirectAdminFromSession();
 		$result = $directAdmin -> addUser($_POST['userName'] , $_POST['email'] , $_POST['package'] , $_POST['password'] );
 		$this -> viewsManager -> setResult($result);
 		$this -> viewsManager -> showSignupSiteAction();
@@ -29,7 +18,7 @@ class AccountManager extends \Core\Controller
 	
 	public function deleteUserAction()
 	{
-		$directAdmin = new DirectAdmin("http://65.108.88.40", "admin", "axm-9wxwdgM3VLfu");
+		$directAdmin = $this -> getDirectAdminFromSession();
 		$result = $directAdmin -> deleteUser($_POST['userName']);
 		$this -> viewsManager -> setResult($result);
 		$this -> viewsManager -> showDeleteAccountSiteAction();
@@ -37,16 +26,24 @@ class AccountManager extends \Core\Controller
 	
 	public function showAllUsersAction()
     {
-        $directAdmin = new DirectAdmin("http://65.108.88.40", "admin", "axm-9wxwdgM3VLfu");
+		$directAdmin = $this -> getDirectAdminFromSession();
 		$result = $directAdmin -> showUsers();
-		$this -> viewsManager -> setResultArray($result);
-		$this -> viewsManager -> setResult("Show users clicked");
+		if( gettype( $result ) == "array")
+		{
+			$this -> viewsManager -> setResultArray($result);
+			$this -> viewsManager -> setResult("Show users clicked");
+		}
+		else
+		{
+			$this -> viewsManager -> setResult($result);
+		}
+		
 		$this -> viewsManager -> showMainSite();
     }
 	
 	public function showUserConfigAction()
 	{
-		$directAdmin = new DirectAdmin("http://65.108.88.40", "admin", "axm-9wxwdgM3VLfu");
+		$directAdmin = $this -> getDirectAdminFromSession();
 		$result = $directAdmin -> showUserConfig($_POST['userName']);
 		if( gettype( $result ) == "array")
 		{

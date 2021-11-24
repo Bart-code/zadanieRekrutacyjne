@@ -10,21 +10,19 @@ class DirectAdmin extends \Core\Model
     private $serverAdres = "";
 	private $userName = "";
 	private $password = "";
-	private $port = "2222";
-
-	public $login = false;
-	public $error = false;
+	private $port = "";
 	
 	private $sock;
 
-    public function __construct($serverAdres, $userName, $password)
+    public function __construct($serverAdres, $userName, $password , $port)
     {
-       $this -> $serverAdres = $serverAdres;
-       $this -> $userName = $userName;
-       $this -> $password = $password;
-	   $this ->sock = new HTTPSocket;
-		$this ->sock->connect($serverAdres, $this->port); 
-		$this ->sock->set_login($userName,$password);
+       $this -> serverAdres = $serverAdres;
+       $this -> serName = $userName;
+       $this -> password = $password;
+       $this -> port = $port;
+	   $this -> sock = new HTTPSocket;
+	   $this -> sock->connect($serverAdres, $port);
+	   $this -> sock->set_login($userName,$password);
     }
 	
 	public function showUsers()
@@ -33,13 +31,16 @@ class DirectAdmin extends \Core\Model
 		$result = $this->sock->fetch_parsed_body();
 		if(count($result) > 0)
 		{
-			return $result['list'];
+			if(isset($result['list']))
+			{
+				return $result['list'];
+			}
+			else return "Error";
 		}
 		else
 		{
 			return $result;
 		}
-		
 	}
 	
 	public function addUser($name,$email,$packasge,$password)
@@ -59,14 +60,19 @@ class DirectAdmin extends \Core\Model
  
 		$result = $this->sock->fetch_parsed_body();
 	 
-		if( $result['error'] != "0" )
+		if( isset( $result['error']) AND $result['error']=="1")
 		{
-			return "Error Creating user. ".$result['details'];
+			return "Error creating user. ".$result['details'];
 		}
-		else
+		elseif( isset( $result['error']) AND $result['error']=="0")
 		{
 			return "Validate";
 		}
+		else
+		{
+			return "Error creating user";
+		}
+		
 	}
 	
 	public function deleteUser($userName)
@@ -74,13 +80,17 @@ class DirectAdmin extends \Core\Model
 		if( empty($userName))return "Error Creating user. Check user name";
 		$this->sock->query('/CMD_API_SELECT_USERS',array( 'confirmed' => 'Confirm' , 'delete' => 'yes' , 'select0' => $userName));
 		$result = $this->sock->fetch_parsed_body();
-		if( $result['error'] != "0" )
+		if( isset( $result['error']) AND $result['error']=="1" )
 		{
 			return "Error Creating user. ".$result['details'];
 		}
-		else
+		elseif( isset( $result['error']) AND $result['error']=="0")
 		{
 			return "Validate";
+		}
+		else
+		{
+			return "Error delete user";
 		}
 	}
 	
@@ -88,7 +98,6 @@ class DirectAdmin extends \Core\Model
 	{
 		$this->sock->query('/CMD_API_SELECT_USERS',array( 'confirmed' => 'Confirm' , 'delete' => 'yes' , 'select0' => $userName));
 		$result = $this->sock->fetch_parsed_body();
-		echo var_dump($result);
 		return $result;
 	}
 	
@@ -110,13 +119,18 @@ class DirectAdmin extends \Core\Model
 	{
 		$this->sock->query('/CMD_API_MANAGE_USER_PACKAGES',array( 'add' => 'Save' , 'packagename' => $newPackage));
 		$result = $this->sock->fetch_parsed_body();
-		if( $result['error'] != "0" )
+		
+		if( isset( $result['error']) AND $result['error']=="1")
 		{
 			return "Error adding new package. ".$result['details'];
 		}
-		else
+		elseif( isset( $result['error']) AND $result['error']=="0")
 		{
 			return "Validate";
+		}
+		else
+		{
+			return "Error adding new package";
 		}
 	}
 	
@@ -126,7 +140,14 @@ class DirectAdmin extends \Core\Model
 		$result = $this->sock->fetch_parsed_body();
 		if(count($result) > 0)
 		{
-			return $result['list'];
+			if(isset($result['list']))
+			{
+				return $result['list'];
+			}
+			else
+			{
+				return "Error showing packages";
+			}
 		}
 		else
 		{
@@ -139,13 +160,18 @@ class DirectAdmin extends \Core\Model
 		$this -> sock -> set_method("POST");
 		$this->sock->query('/CMD_API_MODIFY_USER',array('action' => 'single','user' => $userName, 'evalue'=> $newEmail , 'email' => 'Save E-Mail'));
 		$result = $this->sock->fetch_parsed_body();
-		if( $result['error'] != "0" )
+		
+		if( isset( $result['error']) AND $result['error']=="1")
 		{
 			return "Error changing an email. ".$result['details'];
 		}
-		else
+		elseif( isset( $result['error']) AND $result['error']=="0")
 		{
 			return "Validate";
+		}
+		else
+		{
+			return "Error email changing";
 		}
 	}
 	
@@ -154,13 +180,18 @@ class DirectAdmin extends \Core\Model
 		$this -> sock -> set_method("POST");
 		$this->sock->query('/CMD_API_USER_PASSWD',array('username' => $userName,'passwd' => $newPassword,'passwd2' => $newPassword2));
 		$result = $this->sock->fetch_parsed_body();
-		if( $result['error'] != "0" )
+		
+		if( isset( $result['error']) AND $result['error']=="1")
 		{
 			return "Error changing a password. ".$result['details'];
 		}
-		else
+		elseif( isset( $result['error']) AND $result['error']=="0")
 		{
 			return "Validate";
+		}
+		else
+		{
+			return "Error password changing";
 		}
 	}
 	
@@ -168,13 +199,18 @@ class DirectAdmin extends \Core\Model
 	{
 		$this->sock->query('/CMD_API_MODIFY_USER',array('action' => 'package','user' => $userName,'package' => $newPackage));
 		$result = $this->sock->fetch_parsed_body();
-		if( $result['error'] != "0" )
+		
+		if( isset( $result['error']) AND $result['error']=="1")
 		{
 			return "Error changing a package. ".$result['details'];
 		}
-		else
+		elseif( isset( $result['error']) AND $result['error']=="0")
 		{
 			return "Validate";
+		}
+		else
+		{
+			return "Error package changing";
 		}
 	}
 

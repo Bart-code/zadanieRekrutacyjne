@@ -20,6 +20,11 @@ class ViewsManager extends \Core\Controller
 		$this -> resultArray = $results;
 	}
 	
+	public function showLoginSiteAction()
+    {
+		View::renderTemplate('Home/loginSite.html');
+    }
+	
     public function showMainSiteAction()
     {
 		View::renderTemplate('Main/mainSite.html', ['result' => $this ->result , 'resultsArray' => $this -> resultArray]);
