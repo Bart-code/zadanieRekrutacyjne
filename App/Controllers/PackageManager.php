@@ -28,7 +28,6 @@ class PackageManager extends \App\Controllers\DirectAdminController
 			$this -> viewsManager -> setResult($result);
 			var_dump($_SESSION['serverAddress']);
 		}
-		
 		$this -> viewsManager -> showMainSite();
 	}
 

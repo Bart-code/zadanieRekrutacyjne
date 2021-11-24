@@ -105,13 +105,20 @@ class DirectAdmin extends \Core\Model
 	{
 		$this->sock->query('/CMD_API_SHOW_USER_CONFIG',array('user' => $userName));
 		$result = $this->sock->fetch_parsed_body();
-		if(  !isset( $result['error']) )
+		if( count($result) )
 		{
-			return $result;
+			if( isset( $result['error']) )
+			{
+				return "Error show user config. Wrong user name.";
+			}
+			else
+			{
+				return $result;
+			}
 		}
 		else
 		{
-			return "Unable to show user";
+			return "Error show user config";
 		}
 	}
 	

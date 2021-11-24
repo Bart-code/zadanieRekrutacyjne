@@ -3,7 +3,6 @@
 namespace App\Controllers;
 
 use \Core\View;
-require_once('ServerSingleton.php');
 
 class AdminManager extends \App\Controllers\DirectAdminController
 {

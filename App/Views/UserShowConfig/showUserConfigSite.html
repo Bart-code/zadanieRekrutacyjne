@@ -32,14 +32,14 @@
 							<div class="row ">
 								<div class="col-md-6 mx-auto ">
 									{% if result is not empty %}
-										{% if result != 'Show config available' %}
-											<p class="errorMessage"> {{result}}</p>
-										{% else %}
+										{% if result == 'Show config available' %}
 											<ul class="usersList mt-3">
 												{% for key,value in resultsArray %}
 													<li>{{ key }}: {{ value }}</li>
 												{% endfor %}
 											</ul>
+										{% else %}
+											<p class="errorMessage">{{result}}</p>
 										{% endif %}
 									{% endif %}
 								</div>
